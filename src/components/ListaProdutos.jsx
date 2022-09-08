@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import Item from './Item';
 
 class ListaProdutos extends React.Component {
   state = {
@@ -12,11 +13,7 @@ class ListaProdutos extends React.Component {
     const api = await resultados.json();
 
     const items = api.results.map(({ id, title, thumbnail, price }) => (
-      <div key={ id } data-testid="product">
-        <h6>{title}</h6>
-        <img src={ thumbnail } alt={ title } />
-        <p>{`R$ ${price}`}</p>
-      </div>
+      <Item key={ id } title={ title } thumbnail={ thumbnail } price={ price } />
     ));
 
     this.setState({ lista: items, search: true });
