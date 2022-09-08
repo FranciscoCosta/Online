@@ -9,13 +9,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Categorias />
         <BrowserRouter>
           <Switch>
             <Route exact path="/shoppingcart" component={ ShoppingCart } />
             <Route exact path="/" component={ ListaProdutos } />
           </Switch>
         </BrowserRouter>
+        <Categorias />
       </div>
     );
   }
