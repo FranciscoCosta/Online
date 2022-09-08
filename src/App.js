@@ -1,28 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import ListaProdutos from './components/ListaProdutos';
 // import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
-// Grupo 29
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={ logo } className="App-logo" alt="logo" />
-          <p>Edit src/App.js and save to reload.</p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={ ListaProdutos } />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
