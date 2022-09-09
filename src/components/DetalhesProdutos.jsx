@@ -11,7 +11,6 @@ export default class DetalhesProdutos extends Component {
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
     const resultado = await getProductById(id);
-    console.log(resultado);
     this.setState({
       produto: resultado,
     });

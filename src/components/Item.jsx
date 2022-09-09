@@ -1,11 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Item extends React.Component {
   render() {
     const { title, thumbnail, price, handleAddCart, id } = this.props;
-    const objeto = { title, thumbnail, price, id };
     return (
       <Link to={ `/DetalhesProdutos/${id}` } data-testid="product-detail-link">
         <div data-testid="product" className="card-item-product">
@@ -19,7 +18,7 @@ class Item extends React.Component {
               data-testid="product-add-to-cart"
               type="button"
               onClick={ handleAddCart }
-              value={ objeto }
+              value={ id }
             >
               Adiciona ao Carrinho
             </button>

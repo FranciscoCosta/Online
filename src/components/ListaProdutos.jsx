@@ -7,7 +7,6 @@ class ListaProdutos extends React.Component {
   state = {
     lista: [],
     search: false,
-    cartList: [],
   };
 
   handleApiCall = async ({ target }) => {
@@ -45,11 +44,18 @@ class ListaProdutos extends React.Component {
     this.setState({ lista: items, search: true });
   };
 
-  handleAddCart = (event) => {
-    console.log(event.target.value);
+  handleAddCart = ({ target }) => {
+    const { lista } = this.state;
+    let items = JSON.parse(localStorage.getItem('cartList'));
+    if (!items) items = [];
+    console.log(items);
+    const item = lista.find((elemento) => elemento.key === target.value);
+    // console.log(item);
+    const { props: { children: { props } } } = item;
+    const local = [...items, props];
+    console.log(local);
+    localStorage.setItem('cartList', JSON.stringify(local));
   };
-    // this.setState((prevState) => ({ cartList: [...prevState.cartList,  ] })
-    // localStorage.setItem('cartList','');
   // };
 
   render() {
