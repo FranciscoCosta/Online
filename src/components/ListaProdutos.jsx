@@ -36,12 +36,27 @@ class ListaProdutos extends React.Component {
           thumbnail={ thumbnail }
           price={ price }
           id={ id }
+          handleAddCart={ this.handleAddCart }
         />
       </div>
     ));
 
     this.setState({ lista: items, search: true });
   };
+
+  handleAddCart = ({ target }) => {
+    const { lista } = this.state;
+    let items = JSON.parse(localStorage.getItem('cartList'));
+    if (!items) items = [];
+    console.log(items);
+    const item = lista.find((elemento) => elemento.key === target.value);
+    // console.log(item);
+    const { props: { children: { props } } } = item;
+    const local = [...items, props];
+    console.log(local);
+    localStorage.setItem('cartList', JSON.stringify(local));
+  };
+  // };
 
   render() {
     const { lista, search } = this.state;
