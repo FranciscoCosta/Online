@@ -16,6 +16,16 @@ export default class DetalhesProdutos extends Component {
     });
   }
 
+  handleAddCart = () => {
+    const { produto } = this.state;
+
+    let items = JSON.parse(localStorage.getItem('cartList'));
+    if (!items) items = [];
+    const local = [...items, produto];
+
+    localStorage.setItem('cartList', JSON.stringify(local));
+  };
+
   render() {
     const { produto } = this.state;
     const { title, price, thumbnail } = produto;
@@ -24,6 +34,13 @@ export default class DetalhesProdutos extends Component {
         <h6 data-testid="product-detail-name">{title}</h6>
         <img data-testid="product-detail-image" src={ thumbnail } alt={ title } />
         <p data-testid="product-detail-price">{`R$ ${price}`}</p>
+        <button
+          onClick={ this.handleAddCart }
+          type="button"
+          data-testid="product-detail-add-to-cart"
+        >
+          add carrinho
+        </button>
         <Link to="/shoppingcart" data-testid="shopping-cart-button">
           <button type="button">
             Carrinho
