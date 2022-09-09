@@ -6,25 +6,27 @@ class Item extends React.Component {
   render() {
     const { title, thumbnail, price, handleAddCart, id } = this.props;
     return (
-      <Link to={ `/DetalhesProdutos/${id}` } data-testid="product-detail-link">
-        <div data-testid="product" className="card-item-product">
-          <div className="left">
-            <img src={ thumbnail } alt={ title } />
+      <>
+        <Link to={ `/DetalhesProdutos/${id}` } data-testid="product-detail-link">
+          <div data-testid="product" className="card-item-product">
+            <div className="left">
+              <img src={ thumbnail } alt={ title } />
+            </div>
+            <div className="right">
+              <h6>{title}</h6>
+              <p>{`R$ ${price}`}</p>
+            </div>
           </div>
-          <div className="right">
-            <h6>{title}</h6>
-            <p>{`R$ ${price}`}</p>
-            <button
-              data-testid="product-add-to-cart"
-              type="button"
-              onClick={ handleAddCart }
-              value={ id }
-            >
-              Adiciona ao Carrinho
-            </button>
-          </div>
-        </div>
-      </Link>
+        </Link>
+        <button
+          data-testid="product-add-to-cart"
+          type="button"
+          onClick={ handleAddCart }
+          value={ id }
+        >
+          Adiciona ao Carrinho
+        </button>
+      </>
     );
   }
 }
