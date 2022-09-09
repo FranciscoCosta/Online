@@ -21,20 +21,25 @@ export default class Categorias extends Component {
     const { handleApi } = this.props;
     return (
       <div>
-        <h2>Categorias</h2>
-        { categorias.map(({ id, name }) => (
-          (
-            <label htmlFor={ id } key={ id }>
-              <button
-                id={ id }
-                type="button"
-                data-testid="category"
-                onClick={ handleApi }
-              >
-                {name}
-              </button>
-            </label>)
-        ))}
+        <h2 className="title-hero">Categorias</h2>
+        <div className="category-items">
+          { categorias.map(({ id, name }) => (
+            (
+              <label htmlFor={ id } key={ id }>
+
+                <button
+                  className="category-btn"
+                  id={ id }
+                  type="button"
+                  data-testid="category"
+                  onClick={ handleApi }
+                >
+                  {name}
+                </button>
+              </label>)
+
+          ))}
+        </div>
       </div>
 
     );

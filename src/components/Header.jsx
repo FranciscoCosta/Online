@@ -16,24 +16,28 @@ class Header extends Component {
     const { handleApiCall } = this.props;
 
     return (
-      <div>
-
-        <input
-          type="text"
-          data-testid="query-input"
-          value={ inputValue }
-          onChange={ this.handleChange }
-        />
-        <button
-          data-testid="query-button"
-          type="button"
-          onClick={ handleApiCall }
-          value={ inputValue }
-        >
-          Buscar
-        </button>
-
-        <Link data-testid="shopping-cart-button" to="/shoppingcart">carrinho</Link>
+      <div className="container-header">
+        <div className="header-left">
+          <input
+            type="text"
+            data-testid="query-input"
+            value={ inputValue }
+            onChange={ this.handleChange }
+            className="input-btn-item"
+          />
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ handleApiCall }
+            value={ inputValue }
+            className="btm-procura"
+          >
+            Buscar
+          </button>
+        </div>
+        <div className="header-right">
+          <Link data-testid="shopping-cart-button" to="/shoppingcart">carrinho</Link>
+        </div>
       </div>
     );
   }
