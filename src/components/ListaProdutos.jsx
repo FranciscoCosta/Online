@@ -7,6 +7,7 @@ class ListaProdutos extends React.Component {
   state = {
     lista: [],
     search: false,
+    cartList: [],
   };
 
   handleApiCall = async ({ target }) => {
@@ -36,12 +37,20 @@ class ListaProdutos extends React.Component {
           thumbnail={ thumbnail }
           price={ price }
           id={ id }
+          handleAddCart={ this.handleAddCart }
         />
       </div>
     ));
 
     this.setState({ lista: items, search: true });
   };
+
+  handleAddCart = (event) => {
+    console.log(event.target.value);
+  };
+    // this.setState((prevState) => ({ cartList: [...prevState.cartList,  ] })
+    // localStorage.setItem('cartList','');
+  // };
 
   render() {
     const { lista, search } = this.state;
