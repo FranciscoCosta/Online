@@ -18,6 +18,7 @@ export default class DetalhesProdutos extends Component {
 
   handleAddCart = () => {
     const { produto } = this.state;
+
     let items = JSON.parse(localStorage.getItem('cartList'));
     if (!items) items = [];
     const local = [...items, produto];
