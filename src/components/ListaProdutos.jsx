@@ -15,12 +15,15 @@ export default class ListaProdutos extends Component {
     const api = await resultados.json();
 
     const items = api.results.map(({ id, title, thumbnail, price }) => (
-      <Item
-        key={ id }
-        title={ title }
-        thumbnail={ thumbnail }
-        price={ price }
-      />
+
+      <div className="Card-item" key={ id }>
+        <Item
+          key={ id }
+          title={ title }
+          thumbnail={ thumbnail }
+          price={ price }
+        />
+      </div>
     ));
 
     this.setState({ lista: items, search: true });

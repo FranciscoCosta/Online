@@ -35,7 +35,17 @@ export default class Header extends Component {
         </div>
         <div className="header-right">
 
-          <Link data-testid="shopping-cart-button" to="/shoppingcart">carrinho</Link>
+          <Link
+            data-testid="shopping-cart-button"
+            to="/shoppingcart"
+          >
+            <img
+              src="../img/shopping-cart.png"
+              alt="shooping-cart"
+              className="shopping-cart-svg"
+            />
+
+          </Link>
         </div>
       </div>
     );

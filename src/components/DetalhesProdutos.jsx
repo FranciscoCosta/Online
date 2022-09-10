@@ -39,21 +39,43 @@ export default class DetalhesProdutos extends Component {
       } } = this.state;
 
     return (
-      <div>
-        <h6 data-testid="product-detail-name">{title}</h6>
-        <img data-testid="product-detail-image" src={ thumbnail } alt={ title } />
-        <p data-testid="product-detail-price">{`R$ ${price}`}</p>
-        <button
-          onClick={ this.handleAddCart }
-          type="button"
-          data-testid="product-detail-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </button>
-
+      <div className="container-detalhes-produtos">
         <Link to="/shoppingcart" data-testid="shopping-cart-button">
-          <button type="button">Carrinho</button>
+          <img
+            src="../img/shopping-cart.png"
+            alt="shooping-cart"
+            className="shopping-cart-svg"
+          />
         </Link>
+        <div className="card-detalhes-produtos">
+          <div className="card-detalhes-left">
+            <img data-testid="product-detail-image" src={ thumbnail } alt={ title } />
+          </div>
+          <div className="card-detalhes-right">
+            <h6
+              data-testid="product-detail-name"
+              className="card-detalhes-titulo"
+            >
+              {title}
+
+            </h6>
+            <p
+              data-testid="product-detail-price"
+              className="card-detalhes-price"
+            >
+              {`R$ ${price}`}
+
+            </p>
+            <button
+              onClick={ this.handleAddCart }
+              type="button"
+              data-testid="product-detail-add-to-cart"
+              className="card-detalhes-cart"
+            >
+              Adicionar ao carrinho
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

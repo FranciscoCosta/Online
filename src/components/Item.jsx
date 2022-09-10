@@ -27,6 +27,7 @@ export default class Item extends React.Component {
         </Link>
 
         <button
+          className="add-cart"
           data-testid="product-add-to-cart"
           type="button"
           onClick={ handleAddCart }
