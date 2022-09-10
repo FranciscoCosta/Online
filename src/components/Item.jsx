@@ -1,10 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string, number, func } from 'prop-types';
 import { Link } from 'react-router-dom';
 
-class Item extends React.Component {
+export default class Item extends React.Component {
   render() {
-    const { title, thumbnail, price, handleAddCart, id } = this.props;
+    const {
+      title,
+      thumbnail,
+      price,
+      handleAddCart,
+      id,
+    } = this.props;
+
     return (
       <>
         <Link to={ `/DetalhesProdutos/${id}` } data-testid="product-detail-link">
@@ -18,13 +25,15 @@ class Item extends React.Component {
             </div>
           </div>
         </Link>
+
         <button
+          className="add-cart"
           data-testid="product-add-to-cart"
           type="button"
           onClick={ handleAddCart }
           value={ id }
         >
-          Adiciona ao Carrinho
+          Adicionar ao Carrinho
         </button>
       </>
     );
@@ -32,11 +41,9 @@ class Item extends React.Component {
 }
 
 Item.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  handleAddCart: PropTypes.func.isRequired,
-};
-
-export default Item;
+  id: string,
+  title: string,
+  thumbnail: string,
+  price: number,
+  handleAddCart: func,
+}.isRequired;

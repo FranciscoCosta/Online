@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import Header from './Header';
 import Item from './Item';
 import Categorias from './Categorias';
 
-class ListaProdutos extends React.Component {
+export default class ListaProdutos extends Component {
   state = {
     lista: [],
     search: false,
   };
 
   handleApiCall = async ({ target }) => {
-    const resultados = await fetch(
-      `https://api.mercadolibre.com/sites/MLB/search?q=${target.value}`,
-    );
+    const resultados = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${target.value}`);
     const api = await resultados.json();
 
     const items = api.results.map(({ id, title, thumbnail, price }) => (
-      <Item key={ id } title={ title } thumbnail={ thumbnail } price={ price } />
+      <div className="Card-item" key={ id }>
+        <Item
+          key={ id }
+          title={ title }
+          thumbnail={ thumbnail }
+          price={ price }
+        />
+      </div>
     ));
 
     this.setState({ lista: items, search: true });
   };
 
   handleApi = async ({ target }) => {
-    const resultados = await fetch(
-      `https://api.mercadolibre.com/sites/MLB/search?category=${target.id}`,
-    );
+    const resultados = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${target.id}`);
     const api = await resultados.json();
 
     const items = api.results.map(({ id, title, thumbnail, price }) => (
@@ -46,20 +50,22 @@ class ListaProdutos extends React.Component {
 
   handleAddCart = ({ target }) => {
     const { lista } = this.state;
+
     let items = JSON.parse(localStorage.getItem('cartList'));
     if (!items) items = [];
-    console.log(items);
+
     const item = lista.find((elemento) => elemento.key === target.value);
-    // console.log(item);
     const { props: { children: { props } } } = item;
+
     const local = [...items, props];
-    console.log(local);
     localStorage.setItem('cartList', JSON.stringify(local));
   };
-  // };
 
   render() {
-    const { lista, search } = this.state;
+    const {
+      lista,
+      search,
+    } = this.state;
 
     return (
       <div data-testid="home-initial-message">
@@ -76,6 +82,7 @@ class ListaProdutos extends React.Component {
                 Digite algum termo de pesquisa ou escolha uma categoria.
               </p>
             )}
+
             {search && lista.length === 0 ? (
               <p className="info-hero-main">Nenhum produto foi encontrado</p>
             ) : (
@@ -89,5 +96,3 @@ class ListaProdutos extends React.Component {
     );
   }
 }
-
-export default ListaProdutos;
