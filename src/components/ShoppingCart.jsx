@@ -62,7 +62,6 @@ export default class ShoppingCart extends Component {
             <h1 className="shopping-cart-title">Valor total da compra:</h1>
           </div>
         </div>
-
       </div>
     );
   }
