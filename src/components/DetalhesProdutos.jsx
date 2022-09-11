@@ -16,17 +16,14 @@ export default class DetalhesProdutos extends Component {
   getProdutc = async () => {
     const { match: { params: { id } } } = this.props;
     const resultado = await getProductById(id);
-
+    resultado.quantidade = 1;
     this.setState({ produto: resultado });
   };
 
   handleAddCart = () => {
     const { produto } = this.state;
-
-    let items = JSON.parse(localStorage.getItem('cartList'));
-    if (!items) items = [];
+    const items = JSON.parse(localStorage.getItem('cartList')) || [];
     const local = [...items, produto];
-
     localStorage.setItem('cartList', JSON.stringify(local));
   };
 

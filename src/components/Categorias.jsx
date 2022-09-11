@@ -14,7 +14,6 @@ export default class Categorias extends Component {
 
   pegaCategorias = async () => {
     const categories = await getCategories();
-
     this.setState({ categorias: categories });
   };
 

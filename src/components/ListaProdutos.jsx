@@ -19,6 +19,7 @@ export default class ListaProdutos extends Component {
           thumbnail={ thumbnail }
           price={ price }
           id={ id }
+          quantidade={ 1 }
           handleAddCart={ this.handleAddCart }
         />
       </div>
