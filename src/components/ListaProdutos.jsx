@@ -10,30 +10,8 @@ export default class ListaProdutos extends Component {
     search: false,
   };
 
-  handleApiCall = async ({ target }) => {
-    const resultados = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${target.value}`);
-    const api = await resultados.json();
-
-    const items = api.results.map(({ id, title, thumbnail, price }) => (
-
-      <div className="Card-item" key={ id }>
-        <Item
-          key={ id }
-          title={ title }
-          thumbnail={ thumbnail }
-          price={ price }
-        />
-      </div>
-    ));
-
-    this.setState({ lista: items, search: true });
-  };
-
-  handleApi = async ({ target }) => {
-    const resultados = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${target.id}`);
-    const api = await resultados.json();
-
-    const items = api.results.map(({ id, title, thumbnail, price }) => (
+  handleCallsApi = (apiCall) => {
+    const items = apiCall.results.map(({ id, title, thumbnail, price }) => (
       <div className="Card-item" key={ id }>
         <Item
           key={ id }
@@ -47,6 +25,20 @@ export default class ListaProdutos extends Component {
     ));
 
     this.setState({ lista: items, search: true });
+  };
+
+  handleApiCall = async ({ target }) => {
+    const resultados = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${target.value}`);
+    const api = await resultados.json();
+
+    this.handleCallsApi(api);
+  };
+
+  handleApi = async ({ target }) => {
+    const resultados = await fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${target.id}`);
+    const api = await resultados.json();
+
+    this.handleCallsApi(api);
   };
 
   handleAddCart = ({ target }) => {
