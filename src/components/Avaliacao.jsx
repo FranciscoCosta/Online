@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Reviews from './Reviews';
+import { string } from 'prop-types';
 
 export default class Avaliacao extends Component {
   state = {
     email: '',
-    rating: '',
+    rating: 0,
     review: '',
     validacao: false,
+    lista: [],
   };
+
+  componentDidMount() {
+    const { id } = this.props;
+    const getLocal = JSON.parse(localStorage.getItem(id)) || [];
+    this.setState({ lista: getLocal });
+  }
 
   handleForm = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -17,24 +23,23 @@ export default class Avaliacao extends Component {
   handleSend = () => {
     const { id } = this.props;
     const { email, rating, review } = this.state;
-    if (email === '' || review === '' || rating === 0) {
+    if (email === '' || rating === 0) {
       this.setState({ validacao: true });
       return;
     }
-    let getLocal = JSON.parse(localStorage.getItem(id));
-    if (!getLocal) getLocal = [];
+    const getLocal = JSON.parse(localStorage.getItem(id)) || [];
     const local = {
       email,
       review,
       rating,
     };
     localStorage.setItem(id, JSON.stringify([...getLocal, local]));
-    this.setState({ email: '', review: '' });
+    this.setState({
+      email: '', review: '', lista: [...getLocal, local], validacao: false });
   };
 
   render() {
-    const { email, review, validacao } = this.state;
-    const { id } = this.props;
+    const { email, review, validacao, lista } = this.state;
     return (
       <div>
         <form>
@@ -119,7 +124,6 @@ export default class Avaliacao extends Component {
               cols="30"
               rows="10"
               data-testid="product-detail-evaluation"
-              required
               value={ review }
               placeholder="Deixe sua avaliação"
               onChange={ this.handleForm }
@@ -134,12 +138,19 @@ export default class Avaliacao extends Component {
           </button>
           {validacao && <p data-testid="error-msg">Campos inválidos</p>}
         </form>
-        <Reviews id={ id } />
+
+        {lista.map((reviewLocal, index) => (
+          <div key={ index }>
+            <p data-testid="review-card-email">{reviewLocal.email}</p>
+            <p data-testid="review-card-rating">{reviewLocal.rating}</p>
+            <p data-testid="review-card-evaluation">{reviewLocal.review}</p>
+          </div>
+        ))}
       </div>
     );
   }
 }
 
-Avaliacao.propType = {
-  id: PropTypes.string,
+Avaliacao.propTypes = {
+  id: string,
 }.isRequired;
