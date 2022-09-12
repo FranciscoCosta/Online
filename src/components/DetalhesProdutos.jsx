@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { getProductById } from '../services/api';
 import Avaliacao from './Avaliacao';
+import Reviews from './Reviews';
 
 export default class DetalhesProdutos extends Component {
   state = {
@@ -76,6 +77,7 @@ export default class DetalhesProdutos extends Component {
           </div>
         </div>
         <Avaliacao id={ id } />
+        {/* <Reviews id={ id } /> */}
       </div>
     );
   }
