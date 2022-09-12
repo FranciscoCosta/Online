@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { shape, string } from 'prop-types';
 import { getProductById } from '../services/api';
+import Avaliacao from './Avaliacao';
 
 export default class DetalhesProdutos extends Component {
   state = {
@@ -36,6 +37,7 @@ export default class DetalhesProdutos extends Component {
         thumbnail,
       } } = this.state;
     const { shipping } = this.state;
+    const { match: { params: { id } } } = this.props;
     return (
       <div className="container-detalhes-produtos">
         <Link to="/shoppingcart" data-testid="shopping-cart-button">
@@ -56,14 +58,12 @@ export default class DetalhesProdutos extends Component {
               className="card-detalhes-titulo"
             >
               {title}
-
             </h6>
             <p
               data-testid="product-detail-price"
               className="card-detalhes-price"
             >
               {`R$ ${price}`}
-
             </p>
             <button
               onClick={ this.handleAddCart }
@@ -75,90 +75,7 @@ export default class DetalhesProdutos extends Component {
             </button>
           </div>
         </div>
-        <form>
-          <div>
-            <label htmlFor="email">
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="email"
-                data-testid="product-detail-email"
-                required
-              />
-            </label>
-            <label htmlFor="1">
-              1
-              <input
-                type="radio"
-                name="rating"
-                id="1"
-                data-testid="1-rating"
-                required
-              />
-            </label>
-            <label htmlFor="1">
-              2
-              <input
-                type="radio"
-                name="rating"
-                id="2"
-                data-testid="2-rating"
-                required
-              />
-            </label>
-            <label htmlFor="1">
-              3
-              <input
-                type="radio"
-                name="rating"
-                id="3"
-                data-testid="3-rating"
-                required
-              />
-            </label>
-            <label htmlFor="1">
-              4
-              <input
-                type="radio"
-                name="rating"
-                id="4"
-                data-testid="4-rating"
-                required
-              />
-            </label>
-            <label htmlFor="1">
-              5
-              <input
-                type="radio"
-                name="rating"
-                id="5"
-                data-testid="5-rating"
-                required
-              />
-            </label>
-          </div>
-          <div>
-            <textarea
-              name="avaliacao"
-              id="product-detail"
-              cols="30"
-              rows="10"
-              data-testid="product-detail-evaluation"
-              required
-            >
-              avaliacao
-
-            </textarea>
-          </div>
-          <button
-            type="submit"
-            data-testid="submit-review-btn"
-          >
-            Enviar
-
-          </button>
-        </form>
+        <Avaliacao id={ id } />
       </div>
     );
   }
