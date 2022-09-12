@@ -41,6 +41,8 @@ export default class ShoppingCart extends Component {
     const items = JSON.parse(localStorage.getItem('cartList'));
     const resultado = items.reduce((acc, crr) => {
       if (crr.id === alvo) crr.quantidade += 1;
+      const max = crr.available_quantity;
+      if (crr.quantidade >= max) crr.quantidade = max;
       return [...acc, crr];
     }, []);
     localStorage.setItem('cartList', JSON.stringify(resultado));
@@ -57,7 +59,6 @@ export default class ShoppingCart extends Component {
         <div className="container-shopping-cart">
           <div className="left-shopping-cart">
             <h1 className="shopping-cart-title">Carrinho de compras:</h1>
-            {console.log(cartItems)}
             ;
             {cartItems.map((elementas) => (
               <div className="shopping-cart-card" key={ elementas.id }>

@@ -10,6 +10,7 @@ export default class Item extends React.Component {
       price,
       handleAddCart,
       id,
+      shipping,
     } = this.props;
 
     return (
@@ -18,6 +19,7 @@ export default class Item extends React.Component {
           <div data-testid="product" className="card-item-product">
             <div className="left">
               <img src={ thumbnail } alt={ title } />
+              {shipping.free_shipping && <p data-testid="free-shipping">Frete Gratis</p>}
             </div>
             <div className="right">
               <h6>{title}</h6>
