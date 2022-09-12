@@ -11,15 +11,17 @@ export default class ListaProdutos extends Component {
   };
 
   handleCallsApi = (apiCall) => {
-    const items = apiCall.results.map(({ id, title, thumbnail, price }) => (
-      <div className="Card-item" key={ id }>
+    const items = apiCall.results.map((item) => (
+      <div className="Card-item" key={ item.id }>
         <Item
-          key={ id }
-          title={ title }
-          thumbnail={ thumbnail }
-          price={ price }
-          id={ id }
+          key={ item.id }
+          title={ item.title }
+          thumbnail={ item.thumbnail }
+          price={ item.price }
+          id={ item.id }
           quantidade={ 1 }
+          shipping={ item.shipping }
+          available_quantity={ item.available_quantity }
           handleAddCart={ this.handleAddCart }
         />
       </div>
