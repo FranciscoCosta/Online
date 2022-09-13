@@ -8,11 +8,22 @@ export default class DetalhesProdutos extends Component {
   state = {
     produto: [],
     shipping: false,
+    sum: '',
   };
 
   componentDidMount() {
     this.getProdutc();
+    this.cartQuantidade();
   }
+
+  cartQuantidade = () => {
+    const items = JSON.parse(localStorage.getItem('cartList')) || [];
+    if (items.length > 0) {
+      const final = items.map((elemento) => elemento.quantidade);
+      const sum = final.reduce((accumulator, curr) => accumulator + curr);
+      this.setState({ sum });
+    }
+  };
 
   getProdutc = async () => {
     const { match: { params: { id } } } = this.props;
@@ -27,6 +38,7 @@ export default class DetalhesProdutos extends Component {
     const items = JSON.parse(localStorage.getItem('cartList')) || [];
     const local = [...items, produto];
     localStorage.setItem('cartList', JSON.stringify(local));
+    this.cartQuantidade();
   };
 
   render() {
@@ -35,11 +47,13 @@ export default class DetalhesProdutos extends Component {
         title,
         price,
         thumbnail,
-      } } = this.state;
+
+      }, sum } = this.state;
     const { shipping } = this.state;
     const { match: { params: { id } } } = this.props;
     return (
       <div className="container-detalhes-produtos">
+        <p data-testid="shopping-cart-size">{sum}</p>
         <Link to="/shoppingcart" data-testid="shopping-cart-button">
           <img
             src="../img/shopping-cart.png"
