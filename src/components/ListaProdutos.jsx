@@ -8,7 +8,12 @@ export default class ListaProdutos extends Component {
   state = {
     lista: [],
     search: false,
+    sum: '',
   };
+
+  componentDidMount() {
+    this.cartQuantidade();
+  }
 
   handleCallsApi = (apiCall) => {
     const items = apiCall.results.map((item) => (
@@ -55,17 +60,28 @@ export default class ListaProdutos extends Component {
 
     const local = [...items, props];
     localStorage.setItem('cartList', JSON.stringify(local));
+    this.cartQuantidade();
+  };
+
+  cartQuantidade = () => {
+    const items = JSON.parse(localStorage.getItem('cartList')) || [];
+    if (items.length > 0) {
+      const final = items.map((elemento) => elemento.quantidade);
+      const sum = final.reduce((accumulator, curr) => accumulator + curr);
+      this.setState({ sum });
+    }
   };
 
   render() {
     const {
       lista,
       search,
-    } = this.state;
+      sum } = this.state;
 
     return (
       <div data-testid="home-initial-message">
         <Header handleApiCall={ this.handleApiCall } />
+        <p data-testid="shopping-cart-size">{sum}</p>
 
         <section className="hero-section">
           <div className="hero-side">

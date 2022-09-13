@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ListaProdutos from './components/ListaProdutos';
 import ShoppingCart from './components/ShoppingCart';
 import DetalhesProdutos from './components/DetalhesProdutos';
+import Pagamento from './components/Pagamento';
 
 export default class App extends React.Component {
   render() {
@@ -15,6 +16,7 @@ export default class App extends React.Component {
             <Route exact path="/shoppingcart" component={ ShoppingCart } />
             <Route exact path="/" component={ ListaProdutos } />
             <Route exact path="/DetalhesProdutos/:id" component={ DetalhesProdutos } />
+            <Route exact path="/Pagamento" component={ Pagamento } />
           </Switch>
         </BrowserRouter>
       </div>
