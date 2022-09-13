@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export default class Pagamento extends Component {
   state = {
@@ -10,7 +10,9 @@ export default class Pagamento extends Component {
     celular: '',
     cep: '',
     endereco: '',
+    pagamento: '',
     validacao: false,
+    redirect: false,
 
   };
 
@@ -35,12 +37,15 @@ export default class Pagamento extends Component {
       celular,
       cep,
       endereco,
+      pagamento,
     } = this.state;
     if (fullname === '' || email === ''
-     || cpf === '' || celular === '' || cep === '' || endereco === '') {
+     || cpf === '' || celular === '' || cep === '' || endereco === ''
+     || pagamento === '') {
       this.setState({ validacao: true });
     } else {
       localStorage.removeItem('cartList');
+      this.setState({ redirect: true });
     }
   };
 
@@ -52,7 +57,8 @@ export default class Pagamento extends Component {
       celular,
       cep,
       endereco,
-      validacao } = this.state;
+      validacao, redirect,
+    } = this.state;
     return (
       <section>
         <div>
@@ -186,12 +192,10 @@ export default class Pagamento extends Component {
               value={ 4 }
             />
           </label>
-          <Link to="/">
-            <button data-testid="checkout-btn" type="submit" onClick={ this.apagaItems }>
-              Pagar
-            </button>
-
-          </Link>
+          <button data-testid="checkout-btn" type="submit" onClick={ this.apagaItems }>
+            Pagar
+          </button>
+          {redirect && <Redirect to="/" />}
           {validacao && <p data-testid="error-msg">Campos inválidos</p>}
         </form>
       </section>
